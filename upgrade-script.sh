@@ -972,6 +972,18 @@ if [ -d ~/$mfn ]; then
 										curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/mm.sh >installers/mm.sh
 										chmod +x installers/mm.sh
 									fi
+                                                                else    
+                                                                    # check  if new MM version is 2.35 or higher with  Wayland  as default for npm start
+                                                                        $(verlt  "$remote_version" "2.35" )
+                                                                        r=$?
+                                                                        if [ $r == 1 ]; then 
+                                                                                echo "fixing mm.sh for new Wayland start as default" >> $logfile
+                                                                                if [ $mac == 'Darwin' ]; then
+                                                                                        sed -i ''  's/npm start/npm run start:x11/'  installers/mm.sh 
+                                                                                else 
+                                                                                        sed -i  's/npm start/npm run start:x11/'  installers/mm.sh 
+                                                                                fi
+                                                                        fi   
 								fi
 								# if we got here and the saved copy is still around
 								if [ -e foo.sh ]; then
