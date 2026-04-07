@@ -979,9 +979,9 @@ if [ -d ~/$mfn ]; then
                                                                         if [ $r == 1 ]; then 
                                                                                 echo "fixing mm.sh for new Wayland start as default" >> $logfile
                                                                                 if [ $mac == 'Darwin' ]; then
-                                                                                        sed -i ''  's/npm start/npm run start:x11/'  installers/mm.sh 
+                                                                                        sed -i ''  's/npm start/npm run start:x11/'  installers/*.sh 
                                                                                 else 
-                                                                                        sed -i  's/npm start/npm run start:x11/'  installers/mm.sh 
+                                                                                        sed -i  's/npm start/npm run start:x11/'  installers/*.sh 
                                                                                 fi
                                                                         fi   
 								fi
