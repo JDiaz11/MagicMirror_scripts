@@ -972,18 +972,18 @@ if [ -d ~/$mfn ]; then
 										curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/mm.sh >installers/mm.sh
 										chmod +x installers/mm.sh
 									fi
-                                                                else    
-                                                                    # check  if new MM version is 2.35 or higher with  Wayland  as default for npm start
-                                                                        $(verlt  "$remote_version" "2.35" )
-                                                                        r=$?
-                                                                        if [ $r == 1 ]; then 
-                                                                                echo "fixing mm.sh for new Wayland start as default" >> $logfile
-                                                                                if [ $mac == 'Darwin' ]; then
-                                                                                        sed -i ''  's/npm start/npm run start:x11/'  installers/*.sh 
-                                                                                else 
-                                                                                        sed -i  's/npm start/npm run start:x11/'  installers/*.sh 
-                                                                                fi
-                                                                        fi   
+								else    
+									# check  if new MM version is 2.35 or higher with  Wayland  as default for npm start
+										$(verlt  "$remote_version" "2.35" )
+										r=$?
+										if [ $r == 1 ]; then 
+												echo "fixing mm.sh for new Wayland start as default" >> $logfile
+												if [ $mac == 'Darwin' ]; then
+														sed -i ''  's/npm start/npm run start:x11/'  installers/*.sh 
+												else 
+														sed -i  's/npm start/npm run start:x11/'  installers/*.sh 
+												fi
+										fi   
 								fi
 								# if we got here and the saved copy is still around
 								if [ -e foo.sh ]; then
@@ -1304,6 +1304,10 @@ if [ -d ~/$mfn ]; then
 				echo "restoring custom.css" | tee -a $logfile
 				cp -p save_custom.css custom.css
 				rm save_custom.css
+			fi
+			if [ -d ../defaultmodules]; then
+				echo moving css contents to config
+				find . -maxdepth 1 \( -not -name "font-awesome.css" -not -name "main.css" -not -name "roboto.css" -not -name "."  \) | xargs -I {}  mv {} ../config
 			fi
 		cd - >/dev/null
 		#if [ "$lang." != "en_US.UTF-8." ]; then
