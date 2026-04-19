@@ -1305,7 +1305,7 @@ if [ -d ~/$mfn ]; then
 				cp -p save_custom.css custom.css
 				rm save_custom.css
 			fi
-			if [ -d ../defaultmodules]; then
+			if [ -d ../defaultmodules ]; then
 				echo moving css contents to config
 				find . -maxdepth 1 \( -not -name "font-awesome.css" -not -name "main.css" -not -name "roboto.css" -not -name "."  \) | xargs -I {}  mv {} ../config
 			fi
