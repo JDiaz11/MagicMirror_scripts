@@ -1306,10 +1306,14 @@ if [ -d ~/$mfn ]; then
 				rm save_custom.css
 			fi
 			if [ -d ../defaultmodules ]; then
-				echo moving css contents to config
-				find . -maxdepth 1 \( -not -name "font-awesome.css" -not -name "main.css" -not -name "roboto.css" -not -name "."  \) | xargs -I {}  mv {} ../config
+				echo moving css contents to config | tee -a $logfile
+				find . -maxdepth 1 \( -not -name "font-awesome.css" -not -name "main.css" -not -name "roboto.css" -not -name "."  \) | xargs -I {}  mv {} ../config				
 			fi
 		cd - >/dev/null
+		if [ -d defaultmodules -a -d modules/default ]; then
+		    rm -rf modules/default >/dev/null 2>&1
+		    echo removing old modules/default folder >> $logfile
+		fi 
 		#if [ "$lang." != "en_US.UTF-8." ]; then
 		   if [ "$save_alias." != "." ]; then
 			    echo restoring git alias >>$logfile
