@@ -759,7 +759,7 @@ if [ -d ~/$mfn ]; then
 				if [ "$local_version." != "$remote_version." -o $force == $true -o $test_run == $true ]; then					
 					echo upgrading from version $local_version to $remote_version | tee -a $logfile
 					# check to see  if MM is running
-					mmline=$(LC_ALL=C pm2 ls | grep -m1 online)
+					mmline=$(LC_ALL=C pm2 ls 2>/dev/null | grep -m1 online)
 					if [ "$mmline." != "." ]; then 
 						pm2_name=$(echo $mmline | awk -F\│ '{print $3}' |tr -d [:blank:])
 						mm_running=$(echo $mmline | awk -F\│ '{print $2}' | xargs -i pm2 info {} 2>/dev/null | grep -i magic | grep "script path" | awk -F\│ '{print $3}' | grep -i magicmirror | wc -l)
