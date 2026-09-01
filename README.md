@@ -65,6 +65,14 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scrip
 bash -c "$(curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/fixuppm2.sh)"
 ```
 
+### Reclaim disk space (cache/log cleanup)
+
+`cleanup.sh` clears the apt package cache, trims the systemd journal, clears the npm cache, flushes pm2 logs, and prunes old cached Electron downloads (keeping the 2 most recent). Useful when your SD card fills up over time from repeated installs/updates. Supports `--dry-run` to preview changes without applying them.
+
+```bash
+bash -c "$(curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/cleanup.sh)"
+```
+
 ## Switch to the Midori or firefox or surf browser
 When using the Browser over server mode (instead of the built in electron browser) as shown by package.json using "start":"./run-start.sh", you MAY be able to change which Browser to use, see below
 
